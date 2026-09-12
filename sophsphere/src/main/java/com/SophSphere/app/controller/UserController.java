@@ -1,5 +1,7 @@
-package com.SophSphere.app;
+package com.SophSphere.app.controller;
 
+import com.SophSphere.app.model.User;
+import com.SophSphere.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +38,7 @@ public class UserController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody User updateduser){
-        boolean update = userService.updateUser(id, updateduser);
+        boolean update = userService.updateuser(id, updateduser);
         if (update) {
         return ResponseEntity.ok("User updated");
         }
