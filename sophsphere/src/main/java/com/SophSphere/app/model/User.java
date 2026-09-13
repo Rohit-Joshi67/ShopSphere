@@ -2,30 +2,21 @@ package com.SophSphere.app.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.CurrentTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
-@NoArgsConstructor
-@Entity(name="User_Table")
+@Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long  id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private UserRole role = UserRole.CUSTOMER;
+    private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL , orphanRemoval = true)
-    @JoinColumn(name = "address_id" , referencedColumnName = "id")
-    private Address address;
-    @CurrentTimestamp
-    private LocalDateTime createdAt;
-    @CreationTimestamp
-    private LocalDateTime updatedAt;
+    private String username;
+    private String email;
+    private String password;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private List<Address> addresses;
 }
